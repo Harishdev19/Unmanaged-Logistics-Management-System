@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Def for Order 015'
+define service ZUI_LOG_ORD_015 {
+  expose ZC_LOG_ORD_015 as FreightOrder;
+  expose ZC_LOG_ITM_015 as Item;
+}

@@ -1,0 +1,37 @@
+@Metadata.layer: #CORE
+
+@UI: { 
+  headerInfo: { 
+    typeName: 'Freight Item', 
+    typeNamePlural: 'Freight Items', 
+    title: { type: #STANDARD, value: 'ItemId' },
+    description: { type: #STANDARD, value: 'MaterialName' } 
+  } 
+}
+annotate view ZC_LOG_ITM_015 with
+{
+  @UI.facet: [ 
+    { id: 'ItemInfo', purpose: #STANDARD, type: #IDENTIFICATION_REFERENCE, label: 'Item Details', position: 10 }
+  ]
+
+  @UI: { 
+    lineItem: [ { position: 10, label: 'Item ID' } ], 
+    identification: [ { position: 10, label: 'Item ID' } ] 
+  }
+  ItemId;
+
+  @UI: { 
+    lineItem: [ { position: 20, label: 'Material Name' } ], 
+    identification: [ { position: 20, label: 'Material Name' } ] 
+  }
+  MaterialName;
+
+  @UI: { 
+    lineItem: [ { position: 30, label: 'Quantity' } ], 
+    identification: [ { position: 30, label: 'Quantity' } ] 
+  }
+  Quantity;
+  
+  @UI.hidden: true
+  OrderId;
+}

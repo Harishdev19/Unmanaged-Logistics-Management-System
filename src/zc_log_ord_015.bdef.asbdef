@@ -1,0 +1,29 @@
+projection;
+strict ( 2 );
+
+use draft;
+
+define behavior for ZC_LOG_ORD_015 alias FreightOrder
+{
+  use create;
+  use update;
+  use delete;
+
+  use action SetDelivered;
+
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+
+  use association _Items { create; with draft; }
+}
+
+define behavior for ZC_LOG_ITM_015 alias Item
+{
+  use update;
+  use delete;
+
+  use association _Order { with draft; }
+}

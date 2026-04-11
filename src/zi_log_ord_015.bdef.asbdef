@@ -1,0 +1,43 @@
+unmanaged implementation in class zbp_i_log_ord_015 unique;
+strict ( 2 );
+
+with draft;
+
+define behavior for ZI_LOG_ORD_015 alias FreightOrder
+draft table zlog_ord_015_d
+lock master
+total etag LastChangedAt
+authorization master ( instance )
+etag master LastChangedAt
+{
+  create;
+  update;
+  delete;
+
+  association _Items { create; with draft; }
+
+  field ( readonly ) CreatedAt, LastChangedAt;
+  field ( mandatory ) OrderId;
+
+  // Custom Action
+  action SetDelivered result [1] $self;
+
+  // Draft Actions (Managed by framework, do not implement Edit/Discard in class)
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+}
+
+define behavior for ZI_LOG_ITM_015 alias Item
+draft table zlog_itm_015_d
+lock dependent by _Order
+authorization dependent by _Order
+etag dependent by _Order
+{
+  update;
+  delete;
+  field ( readonly ) OrderId;
+  association _Order { with draft; }
+}
